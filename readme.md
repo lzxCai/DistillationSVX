@@ -2,8 +2,8 @@
 
 This workspace contains two related parts:
 
-1. **`GraphSVX/`**  
-   The original PyTorch Geometric GraphSVX codebase, used for GraphSVX demos and reference implementation details.
+1. **`teacher/`**  
+   
 
 2. **`students/`**  
    DGL-based WCD regression experiments for feedforward/non-feedforward industrial control network graphs. This is the main project code for training ClassicGNN models and running the adapted GraphSVX-style explanation module.
