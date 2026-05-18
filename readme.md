@@ -5,7 +5,7 @@ This workspace contains two related parts:
 1. **`GraphSVX/`**  
    The original PyTorch Geometric GraphSVX codebase, used for GraphSVX demos and reference implementation details.
 
-2. **`asd_exp/`**  
+2. **`students/`**  
    DGL-based WCD regression experiments for feedforward/non-feedforward industrial control network graphs. This is the main project code for training ClassicGNN models and running the adapted GraphSVX-style explanation module.
 
 ## Environment
@@ -32,13 +32,13 @@ pip install -r requirements_windows.txt
 
 ## Data
 
-The `asd_exp/data` directory contains DGL CSV datasets:
+The `students/data` directory contains DGL CSV datasets:
 
 ```text
-asd_exp/data/ffw_origin
-asd_exp/data/nffw_origin
-asd_exp/data/ffw_distill
-asd_exp/data/nffw_distill
+students/data/ffw_origin
+students/data/nffw_origin
+students/data/ffw_distill
+students/data/nffw_distill
 ```
 
 `ffw` means feedforward traffic pattern.  
@@ -111,21 +111,21 @@ This means graph `0` has valid WCD labels for flow `0`, flow `1`, and flow `2`. 
 The main training script is:
 
 ```text
-asd_exp/exp2/exp1.py
+students/models/train.py
 ```
 
 Run from the repository root:
 
 ```bash
 conda activate dis_svx_env
-python asd_exp/exp2/exp1.py \
-  --dataset_path asd_exp/data/ffw_origin \
+python students/models/train.py \
+  --dataset_path students/data/ffw_origin \
   --classicGNN_type GCN \
   --batch_size 128 \
   --num_epochs 1600
 ```
 
-Supported model types in `asd_exp/exp2/classical_gnn.py`:
+Supported model types in `students/models/classical_gnn.py`:
 
 ```text
 GCN
@@ -138,13 +138,13 @@ GatedGCN
 The trained weights are saved to:
 
 ```text
-asd_exp/exp2/model_weights/best_model_<MODEL_TYPE>.pth
+students/models/model_weights/best_model_<MODEL_TYPE>.pth
 ```
 
 Example:
 
 ```text
-asd_exp/exp2/model_weights/best_model_GCN.pth
+students/models/model_weights/best_model_GCN.pth
 ```
 
 ## Evaluating A Trained Model
@@ -152,14 +152,14 @@ asd_exp/exp2/model_weights/best_model_GCN.pth
 Use:
 
 ```text
-asd_exp/exp2/exp2.py
+students/models/evaluate.py
 ```
 
 Example:
 
 ```bash
-cd asd_exp/exp2
-python exp2.py \
+cd students/models
+python evaluate.py \
   --dataset_path ../data/ffw_origin \
   --classicGNN_type GCN \
   --verify_model model_weights/best_model_GCN.pth
@@ -172,7 +172,7 @@ The script reports MAE on the selected dataset.
 The adapted explanation script is:
 
 ```text
-asd_exp/explain_graphsvx_dgl.py
+students/explain_graphsvx_dgl.py
 ```
 
 It ports the core GraphSVX idea to the DGL WCD regression setting:
@@ -188,10 +188,10 @@ It ports the core GraphSVX idea to the DGL WCD regression setting:
 Example:
 
 ```bash
-cd asd_exp
+cd students
 python explain_graphsvx_dgl.py \
   --dataset_path data/ffw_origin \
-  --model_path exp2/model_weights/best_model_GCN.pth \
+  --model_path models/model_weights/best_model_GCN.pth \
   --classicGNN_type GCN \
   --graph_index 0 \
   --target_index 0 \
