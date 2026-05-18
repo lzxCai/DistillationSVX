@@ -52,7 +52,7 @@ for import_dir in (EXP2_DIR, METHOD_DIR):
     if str(import_dir) not in sys.path:
         sys.path.insert(0, str(import_dir))
 
-from classical_gnn import ClassicGNN  # noqa: E402
+from classical_gnn import ClassicGNN  # type: ignore
 
 
 def parse_args() -> argparse.Namespace:
