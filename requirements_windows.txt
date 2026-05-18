@@ -1,0 +1,47 @@
+# Windows setup for this project
+#
+# Recommended environment:
+#   conda create -n dis_svx_env_win python=3.10
+#   conda activate dis_svx_env_win
+#   python -m pip install --upgrade pip
+#   pip install -r requirements_windows.txt
+#
+# Notes:
+# - RTX 5070 is a new NVIDIA GPU generation, so use a CUDA 12.8 PyTorch wheel.
+# - Native Windows DGL CUDA wheels lag behind PyTorch/CUDA support. This file
+#   installs DGL from PyPI, which may be CPU-only on Windows. If you need DGL GPU
+#   acceleration for asd_exp, WSL2/Linux is the safer route.
+# - If DGL is CPU-only, force CPU runs in scripts instead of moving graphs to CUDA.
+
+--extra-index-url https://download.pytorch.org/whl/cu128
+--find-links https://data.pyg.org/whl/torch-2.7.0+cu128.html
+
+torch==2.7.0
+torchvision==0.22.0
+torchaudio==2.7.0
+torchdata==0.11.0
+
+# DGL is required by asd_exp. Native Windows CUDA support may be unavailable for
+# this PyTorch/CUDA combination; use WSL2/Linux for reliable DGL GPU support.
+dgl
+
+# PyG / GraphSVX dependencies. The find-links line above points pip to matching
+# prebuilt PyG extension wheels for torch 2.7.0 + CUDA 12.8 where available.
+torch-geometric
+torch-scatter
+torch-sparse
+torch-cluster
+
+pydantic==2.13.4
+transformers==4.40.2
+tensorboardX
+seaborn>=0.13.2
+scikit-learn
+shap
+
+numpy
+scipy
+networkx
+pandas
+tqdm
+requests

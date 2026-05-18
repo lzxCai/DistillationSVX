@@ -1,0 +1,30 @@
+# Environment setup:
+#   conda create -n dis_svx_env python=3.10
+#   conda activate dis_svx_env
+#   pip install -r requirements.txt
+#
+# This set is verified on macOS arm64 CPU. Do not use the Linux CUDA DGL
+
+torch==2.3.0
+torchvision==0.18.0
+torchdata==0.8.0
+dgl==2.2.0
+pydantic==2.13.4
+transformers==4.40.2
+--find-links https://data.pyg.org/whl/torch-2.3.0+cpu.html
+torch-geometric>=1.6.1
+torch-scatter==2.1.2
+torch-sparse==0.6.18
+torch-cluster==1.6.3
+tensorboardX
+seaborn>=0.13.2
+scikit-learn
+shap
+
+numpy==2.2.6
+scipy==1.15.3
+networkx==3.4.2
+pandas==2.3.3
+tqdm==4.67.3
+requests==2.34.0
+
